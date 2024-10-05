@@ -23,14 +23,12 @@ fn main() {
     let mut turns_left = ALLOWED_ATTEMPTS;
     let selected_word = select_word();
     let mut letters = create_letters(&selected_word);
-    clear_screen();
-    println!("\nWelcome to hangman! Type '*' anytime to quit.");
-    // println!("{}", selected_word); // uncomment this to see what the word is at the beginning of the game
 
     loop {
-        if turns_left != 6 {
-            clear_screen();
-        }
+        clear_screen();
+        println!("\nWelcome to hangman! Type '*' anytime to quit.");
+        println!("The word is: {}", selected_word); // uncomment this to see what the word is at the beginning of the game
+
         display(&letters, turns_left);
         println!("\nTurn(s) left: {}", turns_left);
         println!("Please enter a letter to guess:");
@@ -60,12 +58,16 @@ fn main() {
             GameProgress::InProgress => continue,
             GameProgress::Won => {
                 clear_screen();
+                println!("\n");
+                println!("");
                 win_display(&letters);
                 println!("\nCongrats, you won! The word was {}!", selected_word);
                 break;
             }
             GameProgress::Lost => {
                 clear_screen();
+                println!("\n");
+                println!("");
                 death_display(&letters);
                 println!("\nSorry, you lost! The word was {}", selected_word);
                 break;
